@@ -1,0 +1,23 @@
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #ddd;
+        margin: 0;
+        text-align: center;
+    }
+
+    .not-found {
+        padding: 50px;
+        margin-top: 60px;
+    }
+
+    .not-found img {
+        width: 400px;
+        max-width: 90%;
+        border-radius: 10px;
+    }
+
+    .not-found-message {
+        margin-top: 20px;
+        font-size: 22px;
+        color: #555;
+    }

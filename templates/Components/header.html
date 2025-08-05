@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>ITEA&#128715;</title>
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <nav>
+      <a href="{% url 'Home' %}"><img class="logo" src="{% static 'img/logo.png' %}" alt="logo image" /></a>
+      <div class="mid">
+        <a href="{% url 'Home' %}" class="underline">Home</a>
+        <a href="{% url 'products' %}" class="underline">Shop</a>
+        <a href="{% url 'Home' %}#about" class="underline">About</a>
+        <a href="{% url 'Home' %}#conatct" class="underline">Contact</a>
+        <a href="{% url 'Home' %}#category" class="underline">Categories</a>
+      </div>
+      <div class="right">
+        <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+        {% if user.is_authenticated and user.user_type == 'seller' %}
+          <a href="{% url 'my_products' %}" class="underline">My Products</a>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+          <span class="user-name">
+             Welcome, {{ user.username|default:"User" }}
+          </span>
+                <form method="post" action="{% url 'logout' %}" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" style="background: none; border: none; cursor: pointer;">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </form>
+        
+        {% else %}
+          <a href="{% url 'login' %}"><i class="fa-solid fa-user"></i></a>
+        {% endif %}
+
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+    </nav>
+  </body>
+</html>

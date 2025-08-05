@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'css/about.css' %}" />
+  </head>
+  <body>
+    <div class="about-section">
+      <div class="about-text">
+        <h2>Our Story</h2>
+        <p>
+          At ITEA, we believe that furniture is more than just functional — it’s
+          an expression of who you are.
+          Our journey began with a simple idea: to create beautiful, lasting
+          pieces that bring comfort and personality into every space.
+        </p>
+        <p>
+          From timeless designs to modern silhouettes, every item in our
+          collection is crafted with care,
+          using quality materials and a passion for detail.
+          Whether you’re furnishing a cozy corner or your entire home, we’re
+          here to help you make it uniquely yours.
+        </p>
+        <a  href="{% url 'products'%}"><button>Shop Now</button></a>
+      </div>
+      <div class="page">
+        <div class="container">
+          <img src="{% static 'img/10.jpg' %}" alt="Furniture Room" class="main-image" />
+
+          <div class="object" style="top: 37%; left: 14%;"
+            data-title="Lightning" data-price="$120"
+            data-img="{% static 'img/namnl_st_3_master.jpeg' %}"
+            data-link="products.html?item=lamp"></div>
+
+          <div class="object" style="top: 53%; left: 30%;" data-title="Sofa"
+            data-price="$450" data-img="{% static 'img/11.webp' %}"
+            data-link="products.html?item=sofa"></div>
+
+          <div class="object" style="top: 30%; left: 50%;" data-title="Art"
+            data-price="$90" data-img="{% static 'img/art.jpg' %}"
+            data-link="products.html?item=art"></div>
+
+          <div class="object" style="top: 70%; left: 50%;" data-title="Dining Chair"
+            data-price="$85" data-img="{% static 'img/chair.webp' %}"
+            data-link="products.html?item=chair1"></div>
+
+          <div class="object" style="top: 56%; left: 63%;" data-title="Table"
+            data-price="$95" data-img="{% static 'img/3.jpeg' %}"
+            data-link="products.html?item=chair2"></div>
+
+          <div class="object" style="top: 50%; left: 80%;" data-title="Armchair"
+            data-price="$180" data-img="{% static 'img/1.jpeg' %}"
+            data-link="products.html?item=woodtable"></div>
+
+          <div class="object" style="top:53%; left: 57%;" data-title="Floral Arrangement"
+            data-price="$150" data-img="{% static 'img/decore.webp' %}"
+            data-link="products.html?item=floorlamp"></div>
+
+          <div class="object" style="top:37%; left: 66%;" data-title="Vessel"
+            data-price="$150" data-img="{% static 'img/2.jpeg' %}"
+            data-link="products.html?item=floorlamp"></div>
+
+          <div class="product" id="product">
+            <img src alt="product" id="product-img" />
+            <div class="product-info">
+              <div class="title" id="product-title"></div>
+              <div class="price" id="product-price"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'js/about.js' %}"></script>
+  </body>
+</html>

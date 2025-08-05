@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{%static 'css/home.css'%}">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    {% include 'Components/header.html'%}
+    <div class="slider">
+      <button class="arrow left" onclick="moveSlide(-1)">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <div class="slider-images">
+        <img src="{%static 'img/tizzano2a.png'%}" alt="furniture 2" class="slide">
+        <img src="{%static 'img/21.JPG'%}" alt="furniture 1" class="slide active">{% comment %} change this if you can  {% endcomment %}
+        <img src="{%static 'img/22.JPG'%}" alt="furniture 3" class="slide">
+        <img src="{%static 'img/20.jpg'%}" alt="furniture 4" class="slide">{% comment %} change this if you can  {% endcomment %}
+      </div>
+
+      <button class="arrow right" onclick="moveSlide(1)">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+    <div class="service">
+      <span><i class="fa-solid fa-truck-fast"></i> Free & reliable
+        shipping</span>
+      <span><i class="fa-solid fa-box"></i> Secure packaging</span>
+      <span><i class="fa-solid fa-clipboard-check"></i> Superior
+        Craftsmanship</span>
+      <span><i class="fa-solid fa-clipboard-question"></i> Support 24/7</span>
+    </div>
+    <div id="category" class="category">
+      <h2>Shop by category</h2>
+      <a>
+        <img alt="product" src="{%static 'img/2.jpeg'%}" />
+        <p>Soaf</p>
+      </a>
+    {% comment %} delete all of this only one for data quering  {% endcomment %}
+      <a>
+        <img alt="product" src="table.webp" />
+        <p>Soaf</p>
+      </a>
+      <a>
+        <img alt="product" src="sofa.webp" />
+        <p>Soaf</p>
+      </a>
+      <a>
+        <img alt="product" src="coffetable.webp" />
+        <p>Soaf</p>
+      </a>
+    </div>
+    <div id="about">
+      {%include 'pages/about.html'%}
+    </div>
+    <div class="rooms">
+      <div class="first3">
+        <div class="room-card">
+          <img src="{%static 'img/dinningrooms.jpg'%}" alt="Dining Room" />
+          <div class="room-title">Dining Room</div>
+        </div>
+        <div class="room-card">
+          <img src="{%static 'img/bedroom.jpg'%}" alt="Bedroom" />
+          <div class="room-title">Bedroom</div>
+        </div>
+        <div class="room-card">
+          <img src="{%static 'img/living2.jpg'%}" alt="Living Room" />
+          <div class="room-title">Living Room</div>
+        </div>
+      </div>
+
+      <div class="second3">
+        <div class="room-card">
+          <img src="{%static 'img/childern.jpg'%}" alt="Children Room" />
+          <div class="room-title">Children Room</div>
+        </div>
+        <div class="room-card">
+          <img src="{%static 'img/entrance.jpg'%}" alt="Entrance" />
+          <div class="room-title">Entrance</div>
+        </div>
+        <div class="room-card">
+          <img src="{%static 'img/office2.jpg'%}" alt="Office Room" />
+          <div class="room-title">Office Room</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="contact" id="conatct">
+      <img alt="contactimg" src="{%static 'img/34.jpg'%}" />
+      <form>
+        <h1>Let’s Make Your Space Feel Like Home</h1>
+        <label for="fullname">Full name</label>
+        <input id="fullname" type="text" placeholder="Fullname" required />
+        <label for="Email">Email</label>
+        <input id="Email" type="email" placeholder="Email" required />
+        <label for="message">Message</label>
+        <textarea id="message" type="text" placeholder="Message"
+          required></textarea>
+        <input type="button" value="Submit" />
+      </form>
+    </div>
+    {% include 'Components/footer.html'%}
+    <script src="{%static 'js/home.js'%}"></script>
+  </body>
+</html>

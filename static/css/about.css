@@ -1,0 +1,146 @@
+.about-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 30px;
+    gap: 50px;
+    max-width: 1400px;
+    margin: auto;
+    flex-wrap: wrap;
+}
+
+.about-text {
+    flex: 1;
+    padding: 30px;
+    border-radius: 12px;
+    color: #2c2c2c;
+    max-width: 400px;
+}
+
+.about-text h2 {
+    font-size: 22px;
+    margin-bottom: 18px;
+    font-weight: 600;
+    color: #1e1e1e;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+.about-text h2::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background-color: #100c08;
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+.about-text p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #4a4a4a;
+}
+
+.about-text button {
+    margin: 10px 0px 0px 20px;
+    padding: 10px 22px;
+    background-color: transparent;
+    color: #222222;
+    font-size: 14px;
+    font-weight: 500;
+    border: 2px solid #808080;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+.about-text button:hover {
+    background-color: #808080;
+    color: #fff;
+    border-color: #222222;
+}
+
+
+.page {
+    flex: 2;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+}
+
+.main-image {
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.object {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border: 1.5px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.product {
+    position: absolute;
+    display: none;
+    background-color: #222;
+    color: #eee;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 160px;
+    height: 100px;
+    z-index: 100;
+    font-family: Arial, sans-serif;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.product img {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+}
+
+.product-info .title {
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.product-info .price {
+    color: #ccc;
+}
+
+@media (max-width: 900px) {
+    .about-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .page {
+        max-width: 100%;
+    }
+}

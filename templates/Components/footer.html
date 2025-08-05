@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{%static 'css/footer.css'%}">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <footer>
+      <div class="Customer">
+        <p>Shop</p>
+        <a href="furniture.html">Furniture</a>
+        <a href="decor.html">Decor</a>
+        <a href="dining.html">Dining & Entertaining</a>
+        <a href="softgoods.html">Soft Goods</a>
+        <a href="lighting.html">Lighting</a>
+        <a href="art.html">Art</a>
+      </div>
+
+      <div class="Customer">
+        <p>Customer</p>
+        <a href="{% url 'Home'%}#conatct">Contact Us</a>
+        <a href="legal.html">Legal</a>
+        <a href="faq.html">FAQ</a>
+        <a href="trade.html">Trade</a>
+        <a href="account.html">Account</a>
+      </div>
+
+      <div class="Company">
+        <p>Company</p>
+        <a href="story.html">Our Story</a>
+        <a href="design.html">Interior Design</a>
+        <a href="{% url 'Home'%}#about">Stay With Us</a>
+        <a href="blog.html">A Bit Moore Blog</a>
+      </div>
+
+      <div class="Connect">
+        <p>Connect</p>
+        <a href="mailto:ITEA@gmail.com">ITEA@gmail.com</a>
+        <a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a>
+        <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        <a href="#"><i class="fa-brands fa-pinterest"></i> Pinterest</a>
+      </div>
+
+      <div class="brand">
+        <h1>ITEA&#128715;</h1>
+      </div>
+    </footer>
+    <script src="test.js"></script>
+  </body>
+</html>

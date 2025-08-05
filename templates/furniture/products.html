@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link href="{% static 'css/products.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    {% include 'Components/header.html' %}
+
+    <div class="breadcrumb">All Products</div>
+    <h1 class="category-title">Browse All Furniture</h1>
+
+    <div class="filters">
+      <select>
+        <option>Price</option>
+        <option value="0-500">Under £2000</option>
+        <option value="500-1000">£5000 - £10000</option>
+        <option value="1000-2000">£10000 - £20000</option>
+        <option value="2000">Above £20000</option>
+      </select>
+      <select>
+        <option>Category</option>
+      </select>
+      <select>
+        <option>Sub Category</option>
+      </select>
+    </div>
+
+    <div class="product-grid">
+      {% for product in products %}
+        <div class="card">
+          <div class="subcategory">{{ product.subcategory|default:"" }}</div>
+          <div class="colors">
+            <span style="background: {{ product.color1|default:'#999' }}"></span>
+            <span style="background: {{ product.color2|default:'#ccc' }}"></span>
+          </div>
+          <a href="{% url 'product' product.pk %}">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+          </a>
+          <div class="bottom-circle">
+            <span>{{ product.brand|default:"BRAND" }}</span>
+            <span class="price">{{ product.price }}£ <i class="fa-solid fa-coins"></i></span>
+          </div>
+          <i class="fas fa-cart-plus cart-icon"></i>
+        </div>
+      {% empty %}
+        <p>No products found.</p>
+      {% endfor %}
+    </div>
+
+    <div class="pagination">
+      <button class="current">1</button>
+      <button>2</button>
+      <button>3</button>
+      <button class="arrow-right"><i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    {% include 'Components/footer.html' %}
+    <script src="{% static 'js/products.js' %}"></script>
+  </body>
+</html>

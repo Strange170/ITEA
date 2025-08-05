@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ product.name }} | Product Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/product.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  </head>
+  <body>
+    {% include 'Components/header.html' %}
+
+    <div class="container">
+      <div class="images">
+        <img class="main" src="{{ product.image.url }}" alt="{{ product.name }}" id="mainImage" />
+        <div class="thumbnails">
+          <img src="{{ product.image.url }}" alt="Thumbnail" />
+          <!-- لاحقًا ممكن تضيف صور إضافية لو عملت جدول تاني للصور -->
+        </div>
+      </div>
+
+      <div class="details">
+        <h2>{{ product.name }}</h2>
+        <div class="description">{{ product.description }}</div>
+
+        <div class="info-grid">
+          <div>Category: {{ product.category|capfirst }}</div>
+          <div>Subcategory: {{ product.subcategory }}</div>
+          <div>Brand: {{ product.brand }}</div>
+        </div>
+
+        {% if product.color1 or product.color2 %}
+        <div class="colors">
+          {% if product.color1 %}
+            <div class="color-swatch" style="background: {{ product.color1 }}" title="Color 1"></div>
+          {% endif %}
+          {% if product.color2 %}
+            <div class="color-swatch" style="background: {{ product.color2 }}" title="Color 2"></div>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="price-stock">
+          <div class="price-row">
+            <div class="price"><span class="currency">£</span>{{ product.price }}</div>
+          </div>
+          <div class="stock">
+            <i class="fas fa-box"></i>
+            <span>In Stock:</span> <strong>{{ product.in_stock }}</strong>
+          </div>
+          <input id="amount" type="number" value="1" min="1" max="{{ product.in_stock }}" />
+        </div>
+
+        <div class="actions">
+          <button class="add">Add to Cart</button>
+          <button class="buy">Buy Now</button>
+        </div>
+
+        <div class="seller">
+          <strong>Seller:</strong> {{ product.owner.username }}<br />
+          <strong>Posted:</strong> {{ product.created_at|date:"d M Y" }}
+        </div>
+      </div>
+    </div>
+
+    <h1>Bestseller products</h1>
+    <div class="carousel-container">
+      <div class="carousel" id="carousel">
+        <div class="card">
+          <img src="{% static 'img/111.webp' %}" />
+          <div class="info">Chair 1<br />£150</div>
+        </div>
+        <div class="card">
+          <img src="{% static 'img/3.webp' %}" />
+          <div class="info">Chair 2<br />£175</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="arrow" onclick="scrollLeft()">❮</button>
+      <button class="arrow" onclick="scrollRight()">❯</button>
+    </div>
+
+    <div class="related-title">Related Products</div>
+    <div class="related">
+      <div class="product">
+        <img src="{% static 'img/3.webp' %}" alt="Sofa" />
+        <div class="info">
+          <span>Minimalist Sofa</span>
+          <span>£49900</span>
+        </div>
+      </div>
+    </div>
+
+    {% include 'Components/footer.html' %}
+    <script src="{% static 'js/product.js' %}"></script>
+  </body>
+</html>

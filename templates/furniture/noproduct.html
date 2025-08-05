@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{%static 'css/noproduct.css'%}">
+  </head>
+  <body>
+    {% include 'Components/header.html'%}
+    <div class="not-found">
+      <!-- <img src="25.png" alt="Not Found"> -->
+      <img src="{% static 'img/oops.png'%}" alt="Not Found" />
+      <h1>Error</h1>
+      <div class="not-found-message">Oops! Product not found.</div>
+    </div>
+    {% include 'Components/footer.html'%}
+  </body>
+</html>

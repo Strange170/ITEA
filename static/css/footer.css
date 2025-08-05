@@ -1,0 +1,78 @@
+footer {
+  background-color: #000;
+  color: #ddd;
+  padding: 40px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  font-family: Arial, sans-serif;
+}
+
+footer .Customer,
+footer .Company,
+footer .Connect,
+footer .brand {
+  flex: 1 1 180px;
+  min-width: 150px;
+}
+
+footer p {
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+footer a {
+  display: block;
+  margin: 6px 0;
+  font-size: 15px;
+  text-decoration: none;
+  color: #ddd;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #4e4e4e;
+}
+
+footer .Connect a i {
+  margin-right: 8px;
+}
+
+footer .brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+footer .brand h1 {
+  font-size: 38px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+@media (max-width: 992px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 600px) {
+  footer p {
+    font-size: 16px;
+  }
+
+  footer a {
+    font-size: 14px;
+  }
+
+  footer .brand h1 {
+    font-size: 28px;
+  }
+}
+
+
