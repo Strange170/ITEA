@@ -1,0 +1,55 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.pending-container {
+  max-width: 800px;
+  margin: 60px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.pending-container h2 {
+  font-size: 26px;
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.pending-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pending-container li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.approve-btn {
+  background-color: #22c55e;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.approve-btn:hover {
+  background-color: #16a34a;
+}
+
+.empty-msg {
+  text-align: center;
+  color: #888;
+  font-size: 16px;
+}

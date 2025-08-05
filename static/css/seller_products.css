@@ -99,3 +99,22 @@ h1 {
   font-size: 16px;
   color: #999;
 }
+.top-buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.dashboard-btn {
+  display: inline-block;
+  background-color: #325fd2;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+
+

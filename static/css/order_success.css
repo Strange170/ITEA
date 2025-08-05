@@ -1,0 +1,28 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #eee;
+  margin: 0;
+  padding: 0;
+}
+
+.success-container {
+  max-width: 600px;
+  margin: 100px auto;
+  background: #fff;
+  padding: 60px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.success-container h2 {
+  font-size: 28px;
+  color: #22c55e;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.success-container p {
+  font-size: 18px;
+  color: #333;
+}

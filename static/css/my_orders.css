@@ -1,0 +1,56 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #eee;
+  margin: 0;
+  padding: 0;
+}
+
+.orders-container {
+  max-width: 1000px;
+  margin: 60px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.orders-container h2 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.order-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+.order-card h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.order-card p {
+  margin: 4px 0;
+  color: #333;
+}
+
+.order-card ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.order-card li {
+  color: #555;
+}
+
+.empty-msg {
+  text-align: center;
+  color: #888;
+  font-size: 18px;
+}

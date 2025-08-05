@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Success</title>
+  <link rel="stylesheet" href="{% static 'css/order_success.css' %}">
+</head>
+<body>
+
+  {% include 'Components/header.html' %}
+
+  <div class="success-container">
+    <h2>✅ Order Placed Successfully!</h2>
+    <p>Thank you for your purchase. We'll deliver your items soon.</p>
+  </div>
+
+  {% include 'Components/footer.html' %}
+
+</body>
+</html>

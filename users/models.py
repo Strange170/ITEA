@@ -6,6 +6,10 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError('Email address is required')
         email = self.normalize_email(email)
+
+        if user_type == 'seller':
+            user_type = 'pending'
+
         user = self.model(email=email, user_type=user_type, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -19,9 +23,10 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     USER_TYPES = (
-        ('buyer', 'Buyer'),
-        ('seller', 'Seller'),
-        ('admin', 'Admin'),
+    ('buyer', 'Buyer'),
+    ('seller', 'Seller'),
+    ('pending', 'Pending Seller'),
+    ('admin', 'Admin'),
     )
 
     email = models.EmailField(unique=True)

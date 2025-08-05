@@ -1,0 +1,50 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #eee;
+  margin: 0;
+  padding: 0;
+}
+
+.checkout-container {
+  max-width: 600px;
+  margin: 60px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-container h2 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.checkout-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.checkout-container input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.checkout-container button {
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.checkout-container button:hover {
+  background-color: #111;
+}

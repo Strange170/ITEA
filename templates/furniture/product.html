@@ -54,7 +54,11 @@
         </div>
 
         <div class="actions">
-          <button class="add">Add to Cart</button>
+          <form method="post" action="{% url 'add_to_cart' product.id %}">
+    {% csrf_token %}
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button>
+</form>
+
           <button class="buy">Buy Now</button>
         </div>
 

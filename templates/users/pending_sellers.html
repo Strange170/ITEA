@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pending Sellers</title>
+  <link rel="stylesheet" href="{% static 'css/pending_sellers.css' %}">
+</head>
+<body>
+  {% include 'Components/header.html' %}
+
+  <div class="pending-container">
+    <h2>🕓 Pending Seller Requests</h2>
+
+    {% if pending_users %}
+      <ul>
+        {% for user in pending_users %}
+          <li>
+            <span>{{ user.username }} ({{ user.email }})</span>
+            <a href="{% url 'approve_seller' user.id %}" class="approve-btn">Approve</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty-msg">No pending sellers found.</p>
+    {% endif %}
+  </div>
+
+  {% include 'Components/footer.html' %}
+</body>
+</html>

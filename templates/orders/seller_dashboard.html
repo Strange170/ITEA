@@ -1,0 +1,51 @@
+    {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Seller Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="{% static 'css/seller_dashboard.css' %}">
+</head>
+<body>
+
+  {% include 'Components/header.html' %}
+
+  <div class="dashboard-container">
+    <h2>📊 Sales Analytics</h2>
+
+    <canvas id="salesChart" width="400" height="200"></canvas>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    const salesChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ labels|safe }},
+            datasets: [{
+                label: 'Total Units Sold',
+                data: {{ data|safe }},
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                      stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+  </script>
+
+  {% include 'Components/footer.html' %}
+</body>
+</html>
