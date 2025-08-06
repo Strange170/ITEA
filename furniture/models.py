@@ -14,7 +14,7 @@ class Product(models.Model):
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='furniture')
     subcategory = models.CharField(max_length=100, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    color1 = models.CharField(max_length=20, blank=True)  # Ex: "#333"
+    color1 = models.CharField(max_length=20, blank=True)  
     color2 = models.CharField(max_length=20, blank=True)
     image = models.ImageField(upload_to='product_images/', default='product_images/default.jpg')
     brand = models.CharField(max_length=100, blank=True)
