@@ -18,7 +18,10 @@
           <div class="order-header">
             <strong>Order ID:</strong> {{ order.id }} |
             <strong>User:</strong> {{ order.user.username }} |
-            <strong>Status:</strong> {{ order.status }} |
+            <strong>Status:</strong> {{ order.status }}
+                <a href="{% url 'toggle_order_status' order.id %}" class="btn status-toggle">
+                  Change
+                </a>
             <strong>Date:</strong> {{ order.created_at|date:"d M Y H:i" }}
           </div>
           <div class="order-info">

@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from cart.models import Cart, CartItem
 from .models import Order, OrderItem
@@ -71,3 +72,24 @@ def is_admin(user):
 def admin_all_orders_view(request):
     orders = Order.objects.select_related('user').prefetch_related('items__product').order_by('-created_at')
     return render(request, 'orders/admin_all_orders.html', {'orders': orders})
+
+@user_passes_test(is_admin)
+def toggle_order_status(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    if order.status == 'PENDING':
+        order.status = 'COMPLETED'
+    else:
+        order.status = 'PENDING'
+    order.save()
+    messages.success(request, f"Order #{order.id} status changed to {order.status}")
+    return redirect('admin_all_orders')
+@user_passes_test(is_admin)
+def toggle_order_status(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    if order.status == 'PENDING':
+        order.status = 'COMPLETED'
+    else:
+        order.status = 'PENDING'
+    order.save()
+    messages.success(request, f"Order #{order.id} status changed to {order.status}")
+    return redirect('admin_all_orders')
