@@ -16,7 +16,7 @@ class SignUpView(generic.CreateView):
 
 @login_required
 def profile_view(request):
-    user = request.user  # هو الـ CustomUser نفسه
+    user = request.user 
     if request.method == 'POST':
         phone = request.POST.get('phone', '').strip()
         name = request.POST.get('name')

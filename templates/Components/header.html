@@ -25,9 +25,7 @@
           <a href="{% url 'my_products' %}" class="underline">My Products</a>
         {% endif %}
 
-        {% if user.is_authenticated and user.user_type == 'buyer' %}
-          <a href="{% url 'my_orders' %}" class="underline">My Orders</a>
-        {% endif %}
+
       </div>
 
       <div class="right">
@@ -57,6 +55,10 @@
         {% endif %}
 
         <a href="{% url 'cart_view' %}"><i class="fa-solid fa-cart-shopping"></i></a>
+        
+                {% if user.is_authenticated and user.user_type == 'buyer' %}
+          <a href="{% url 'my_orders' %}"><i class="fas fa-box-archive"></i></a>
+        {% endif %}
       </div>
     </nav>
   </body>
