@@ -6,11 +6,45 @@ from django.contrib.auth.decorators import user_passes_test, login_required
 from .models import CustomUser
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+import re
+
 
 class SignUpView(generic.CreateView):
     form_class = CustomUserCreationForm
     template_name = 'users/signup.html'
     success_url = reverse_lazy('login')
+
+@login_required
+def profile_view(request):
+    user = request.user  # هو الـ CustomUser نفسه
+    if request.method == 'POST':
+        phone = request.POST.get('phone', '').strip()
+        name = request.POST.get('name')
+        location = request.POST.get('location')
+        information = request.POST.get('information')
+        img = request.FILES.get('img')
+
+        user.username = name if name else user.username
+        user.phone = phone
+        user.location = location
+        user.information = information
+        if img:
+            user.img = img
+      
+            
+        
+        if not re.fullmatch(r'\d{10,15}', phone):
+            messages.error(request, 'Phone number must contain only digits (10 to 15 digits).')
+            return render(request, 'users/profile.html', {'profile': user})
+
+        user.phone = phone 
+        user.save()
+
+        messages.success(request, 'Profile updated successfully.')
+
+        return redirect('profile')
+
+    return render(request, 'users/profile.html', {'profile': request.user})
 
 def is_admin(user):
     return user.is_authenticated and user.user_type == 'admin'

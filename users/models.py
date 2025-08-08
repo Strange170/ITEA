@@ -34,6 +34,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     user_type = models.CharField(max_length=10, choices=USER_TYPES, default='buyer')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
+    information = models.TextField(blank=True, null=True)
+    img = models.ImageField(upload_to='profile_images/', blank=True, null=True)
 
     objects = CustomUserManager()
 
@@ -42,3 +46,5 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.username} ({self.user_type})"
+
+

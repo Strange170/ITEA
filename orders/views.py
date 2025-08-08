@@ -12,11 +12,12 @@ def checkout_view(request):
     cart, created = Cart.objects.get_or_create(user=request.user)
     items = cart.items.all()
 
+    total_price = sum(item.get_total_price() for item in items)  
+
     if request.method == 'POST':
         full_name = request.POST['full_name']
         address = request.POST['address']
         phone = request.POST['phone']
-        total_price = sum(item.get_total_price() for item in items)
 
         order = Order.objects.create(
             user=request.user,
@@ -34,11 +35,20 @@ def checkout_view(request):
                 price=item.product.price,
             )
 
+            product = item.product
+            product.in_stock -= item.quantity
+            if product.in_stock < 0:
+                product.in_stock = 0
+            product.save()
+
         cart.items.all().delete()
 
         return redirect('order_success')
 
-    return render(request, 'orders/checkout.html', {'cart_items': items})
+    return render(request, 'orders/checkout.html', {
+        'cart_items': items,
+        'total_price': total_price,
+    })
 
 
 @login_required

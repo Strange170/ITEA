@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+ <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+
+    
+
+
+
+<body>
+    
+{% include 'Components/header.html' %}
+
+
+<div class="profile-container">
+  <div class="profile-header">
+    <img
+      id="profile-img"
+      src="{% if profile.img %}{{ profile.img.url }}{% else %}https://via.placeholder.com/80{% endif %}"
+      alt="Profile Image"
+      style="
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+      "
+    />
+    <div class="details">
+      <h2 id="name-display">{{ profile.username }}</h2>
+      <span id="location-display">{{ profile.information }}</span>
+    </div>
+    <button class="edit-btn" onclick="toggleEdit(this)">
+      <i class="fa-regular fa-pen-to-square"></i> Edit
+    </button>
+  </div>
+
+  <form id="profile-form" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="section">
+      <h3>Personal Info</h3>
+      <div class="field-row">
+        <div class="field">
+          <label>Name</label>
+          <p>{{ profile.username }}</p>
+          <input type="text" name="username" value="{{ profile.username }}" />
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <p>{{ profile.email }}</p>
+          <input
+            type="email"
+            name="email"
+            value="{{ profile.email }}"
+            readonly
+          />
+        </div>
+        <div class="field">
+          <label>Phone</label>
+          <p>{{ profile.phone }}</p>
+          <input 
+            type="tel" 
+            name="phone" 
+            value="{{ profile.phone }}" 
+            pattern="[0-9]{10,15}" 
+            title="Please enter only numbers, min 10 digits" 
+            required 
+            />
+        </div>
+        <div class="field">
+          <label>Location</label>
+          <p>{{ profile.location }}</p>
+          <input
+            type="text"
+            name="location"
+            value="{{ profile.location }}"
+          />
+        </div>
+        <div class="field">
+          <label>Image</label>
+          <input type="file" name="img" accept="image/*" />
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Information</h3>
+      <div class="field">
+        <label>Bio / About</label>
+        <p>{{ profile.information }}</p>
+        <textarea name="information">{{ profile.information }}</textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="save-btn">Save Changes</button>
+  </form>
+</div>
+
+<script>
+  function toggleEdit(button) {
+    const container = document.querySelector(".profile-container");
+    const inputs = container.querySelectorAll("input, textarea");
+    const paragraphs = container.querySelectorAll("p");
+    const saveBtn = container.querySelector(".save-btn");
+
+    inputs.forEach((input) => (input.style.display = "block"));
+    paragraphs.forEach((p) => (p.style.display = "none"));
+    saveBtn.style.display = "inline-block";
+    button.style.display = "none";
+  }
+</script>
+</body>
+</html>

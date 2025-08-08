@@ -1,50 +1,200 @@
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #eee;
-  margin: 0;
-  padding: 0;
-}
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-.checkout-container {
-  max-width: 600px;
-  margin: 60px auto;
-  background: #fff;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
+    body {
+      margin: 0;
+      background: #f4f4f4;
+    }
 
-.checkout-container h2 {
-  font-size: 26px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
-}
+    .checkout-wrapper {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 1200px;
+      margin: auto;
+    }
 
-.checkout-container form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+    .checkout-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-.checkout-container input {
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-}
+    .form-section {
+      width: 60%;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
 
-.checkout-container button {
-  padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
+    .form-row {
+      display: flex;
+      gap: 20px;
+    }
 
-.checkout-container button:hover {
-  background-color: #111;
-}
+    .form-group {
+      flex: 1;
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .submit-btn {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .cart-section {
+      width: 40%;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      max-height: 600px;
+    }
+
+    .cart-items {
+      overflow-y: auto;
+      max-height: 200px;
+      margin-bottom: 15px;
+      border: 1px solid #eee;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+
+    .cart-item img {
+      width: 50px;
+      margin-right: 10px;
+    }
+
+    .cart-info {
+      flex-grow: 1;
+    }
+
+    .remove-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      color: red;
+      cursor: pointer;
+    }
+
+    .cart-summary {
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      margin-bottom: 15px;
+    }
+
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .method-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+    }
+
+    .method-option:hover .method-info {
+      display: block;
+    }
+
+    .method-info {
+      display: none;
+      position: absolute;
+      left: 25px;
+      top: 25px;
+      background: #eee;
+      padding: 8px;
+      border-radius: 6px;
+      width: 250px;
+      font-size: 12px;
+      z-index: 2;
+    }
+
+    .method-option img {
+      width: 30px;
+    }
+
+    .credit-images {
+      display: flex;
+      gap: 5px;
+      margin-left: auto;
+    }
+
+    .credit-images img {
+      width: 30px;
+      height: auto;
+      cursor: pointer;
+    }
+
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+      width: 300px;
+    }
+
+    #popup h4 {
+      margin-top: 0;
+    }
+
+    #popup input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 5;
+    }

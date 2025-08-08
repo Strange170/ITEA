@@ -3,26 +3,146 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="{% static 'css/checkout.css'%}" />
   <title>Checkout</title>
-  <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 </head>
 <body>
+{% include 'Components/header.html' %}
 
-  {% include 'Components/header.html' %}
+<div id="overlay"></div>
+<div id="popup">
+  <h4>Enter Credit Card Details</h4>
+  <input type="text" placeholder="Cardholder Name" />
+  <input type="text" placeholder="Card Number" />
+  <input type="text" placeholder="MM/YY" />
+  <input type="text" placeholder="CVV" />
+  <button type="button" onclick="closePopup()">Close</button>
+</div>
 
+<div class="checkout-wrapper">
   <div class="checkout-container">
-    <h2>🧾 Checkout</h2>
 
-    <form method="post">
+    <form method="post" class="form-section">
       {% csrf_token %}
-      <input type="text" name="full_name" placeholder="Full Name" required />
-      <input type="text" name="address" placeholder="Delivery Address" required />
-      <input type="text" name="phone" placeholder="Phone Number" required />
-      <button type="submit">Place Order</button>
-    </form>
-  </div>
+      <h2>Checkout</h2>
 
-  {% include 'Components/footer.html' %}
+      <div class="form-row">
+        <div class="form-group">
+          <label for="full_name">Full Name</label>
+          <input
+            type="text"
+            id="full_name"
+            name="full_name"
+            placeholder="Full Name"
+            required
+            value="{{ request.user.get_full_name }}"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Delivery Address</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          placeholder="Delivery Address"
+          required
+          value="{{ request.POST.address }}"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input
+          type="text"
+          id="phone"
+          name="phone"
+          placeholder="Phone Number"
+          required
+          value="{{ request.POST.phone }}"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="order_notes">Order Notes</label>
+        <textarea id="order_notes" name="order_notes" placeholder="Order Notes">{{ request.POST.order_notes }}</textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Place Order</button>
+    </form>
+
+    <div class="cart-section">
+      <h3>Your Payment Details</h3>
+      <div class="cart-items">
+        {% for item in cart_items %}
+        <div class="cart-item">
+          <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" />
+          <div class="cart-info">
+            <p>{{ item.product.name }}</p>
+            <small>{{ item.quantity }} x £{{ item.product.price }}</small>
+          </div>
+          <!-- زرار إزالة ممكن تضيفه هنا لو عايز -->
+          <!-- <button class="remove-btn">&times;</button> -->
+        </div>
+        {% empty %}
+        <p>Your cart is empty.</p>
+        {% endfor %}
+      </div>
+
+      <div class="cart-summary">
+        <p>Subtotal: <strong>£{{ total_price }}</strong></p>
+        <p>Shipping: <strong>£0</strong></p>
+        <hr />
+        <p>Total: <strong>£{{ total_price }}</strong></p>
+      </div>
+
+      <div class="payment-methods">
+        <label class="method-option">
+          <input type="checkbox" name="payment_method" value="cash" /> Pay on Delivery
+          <span class="method-info">You will pay with cash when you receive the product.</span>
+        </label>
+
+        <label class="method-option">
+          <input type="checkbox" name="payment_method" value="bank" /> Bank Transfer
+          <span class="method-info">Transfer to our official bank account. You’ll get the details after confirming.</span>
+        </label>
+
+        <label class="method-option">
+          <input type="checkbox" name="payment_method" value="card" /> Credit Card
+          <div class="credit-images">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png"
+              onclick="openPopup()"
+              alt="Visa"
+            />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png"
+              onclick="openPopup()"
+              alt="Mastercard"
+            />
+          </div>
+          <span class="method-info">Click a card to enter payment details.</span>
+        </label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function openPopup() {
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+  }
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  }
+</script>
+
+{% include 'Components/footer.html' %}
 </body>
 </html>

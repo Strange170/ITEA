@@ -10,16 +10,18 @@
      color: #333;
  }
 
- .container {
-     margin: 70px 0px 0px 30px;
-     display: flex;
-     background: #fff;
-     border-radius: 16px;
-     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-     padding: 30px;
-     gap: 40px;
-     width: 1200px;
- }
+.container {
+    margin: 70px auto 0;
+    display: flex;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    gap: 40px;
+    max-width: 15000px;
+    width: 90%; 
+}
+
 
  .images {
      flex: 1;
@@ -114,18 +116,69 @@
      border: 2px solid #333;
  }
 
+ .price-stock {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     margin: 15px 0;
+     flex-wrap: wrap;
+     font-family: 'Segoe UI', sans-serif;
+ }
+
+
+ .price-stock .price {
+     font-size: 22px;
+     font-weight: bold;
+     color: #333;
+     width: 100%;
+     display: block;
+ }
+
+ .price-row {
+     width: 100%;
+     margin-bottom: 10px;
+ }
+
+ .price-stock .stock {
+     display: flex;
+     align-items: center;
+     gap: 6px;
+     font-size: 15px;
+     color: #4a4a4a;
+     background: #eee;
+     padding: 6px 12px;
+     border-radius: 6px;
+ }
+
+
+ .price-stock .stock i {
+     color: #333;
+     font-size: 16px;
+ }
+
+ input {
+     width: 60px;
+     padding: 6px 10px;
+     font-size: 15px;
+     border: 1px solid #ccc;
+     border-radius: 6px;
+     outline: none;
+     background-color: #f9f9f9;
+     text-align: center;
+     transition: 0.2s ease-in-out;
+ }
+
+ input:focus {
+     border-color: #a67c52;
+     box-shadow: 0 0 5px rgba(166, 124, 82, 0.3);
+ }
+
  .actions {
      display: flex;
      align-items: center;
-     gap: 15px;
-     margin-bottom: 30px;
- }
-
- .actions input[type='number'] {
-     width: 60px;
-     padding: 8px;
-     border-radius: 8px;
-     border: 1px solid #aaa;
+     gap: 10px;
+     margin-top: 20px;
+     margin-bottom: 20px;
  }
 
  .actions button {
@@ -157,7 +210,7 @@
  }
 
  h1 {
-     margin: 40px 0px 0px 0px ;
+     margin: 40px 0px 0px 0px;
      font-size: 28px;
      text-align: center;
  }
@@ -258,3 +311,30 @@
      font-size: 14px;
      color: #222;
  }
+ 
+ #amount {
+  width: 80px;
+  padding: 8px 12px;
+  font-size: 18px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 10px;
+  border: 1px solid #000000;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  -moz-appearance: textfield;
+}
+
+#amount:focus {
+  border-color: #000000;
+  box-shadow: 0 0 8px #000000;
+}
+
+#amount::-webkit-inner-spin-button,
+#amount::-webkit-outer-spin-button {
+  -webkit-appearance: auto;
+  appearance: auto;
+  opacity: 1;
+  width: 18px;
+  height: 30px;
+}

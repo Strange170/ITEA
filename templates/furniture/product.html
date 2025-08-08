@@ -50,16 +50,33 @@
             <i class="fas fa-box"></i>
             <span>In Stock:</span> <strong>{{ product.in_stock }}</strong>
           </div>
-          <input id="amount" type="number" value="1" min="1" max="{{ product.in_stock }}" />
         </div>
 
         <div class="actions">
-          <form method="post" action="{% url 'add_to_cart' product.id %}">
-    {% csrf_token %}
-    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button>
+<form method="post" action="{% url 'cart_actions' product.id %}">
+  {% csrf_token %}
+  
+  <input 
+    type="number" 
+    name="quantity" 
+    id="amount" 
+    value="1" 
+    min="1" 
+    max="{{ product.in_stock }}" 
+  />
+  
+  <button type="submit" name="action" value="add_to_cart" class="bg-blue-500 text-white px-4 py-2 rounded"
+    {% if product.in_stock == 0 %}disabled style="opacity: 0.5; cursor: not-allowed;"{% endif %}>
+    Add to Cart
+  </button>
+
+  <button type="submit" name="action" value="buy_now" class="buy"
+    {% if product.in_stock == 0 %}disabled style="opacity: 0.5; cursor: not-allowed;"{% endif %}>
+    Buy Now
+  </button>
 </form>
 
-          <button class="buy">Buy Now</button>
+
         </div>
 
         <div class="seller">

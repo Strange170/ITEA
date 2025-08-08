@@ -3,17 +3,31 @@ from furniture.models import Product
 from .models import Cart, CartItem
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
-def add_to_cart(request, product_id):
+def cart_actions(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart, created = Cart.objects.get_or_create(user=request.user)
-    
-    cart_item, item_created = CartItem.objects.get_or_create(cart=cart, product=product)
-    if not item_created:
-        cart_item.quantity += 1
+
+    quantity = int(request.POST.get('quantity', 1))
+    quantity = max(1, min(quantity, product.in_stock))  # تأكد الكمية ضمن الحد
+
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    if not created:
+        new_quantity = cart_item.quantity + quantity
+        cart_item.quantity = min(new_quantity, product.in_stock)
+    else:
+        cart_item.quantity = quantity
     cart_item.save()
 
-    return redirect('cart_view')  
+    action = request.POST.get('action')
+
+    if action == 'buy_now':
+        return redirect('checkout')
+    else:
+        return redirect('cart_view')
+
+
 
 @login_required
 def cart_view(request):
@@ -46,7 +60,11 @@ def decrease_quantity(request, item_id):
 @login_required
 def increase_quantity(request, item_id):
     item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
-    item.quantity += 1
-    item.save()
+    if item.quantity < item.product.in_stock:
+        item.quantity += 1
+        item.save()
+    else:
+        item.quantity = item.product.in_stock  
+        item.save()
     return redirect('cart_view')
 

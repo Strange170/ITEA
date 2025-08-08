@@ -13,6 +13,7 @@ urlpatterns = [
     ), name='login'),
     
     path('logout/', LogoutView.as_view(next_page='Home'), name='logout'),
+    path('profile/', views.profile_view, name='profile'),
     path('admin/pending-sellers/', views.pending_sellers_view, name='pending_sellers'),
     path('admin/approve-seller/<int:user_id>/', views.approve_seller, name='approve_seller'),
     path('admin/users/', views.manage_users_view, name='manage_users'),
