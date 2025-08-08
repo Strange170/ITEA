@@ -37,6 +37,8 @@
             <a href="{% url 'manage_users' %}" class="underline">Manage Users</a>
             <a href="{% url 'pending_sellers' %}" class="underline">Approve Sellers</a>
             <a href="{% url 'admin_all_orders' %}" class="underline">All Orders</a>
+            <a href="{% url 'admin_products' %}" class="underline">Manage Products</a>
+
         {% endif %}
 
         {% if user.is_authenticated %}

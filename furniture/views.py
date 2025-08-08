@@ -1,3 +1,4 @@
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product
@@ -56,23 +57,38 @@ def add_product(request):
 
 @login_required
 def delete_product(request, pk):
-    product = get_object_or_404(Product, pk=pk, owner=request.user)
+    if request.user.user_type == 'admin':
+        product = get_object_or_404(Product, pk=pk)
+        if request.method == 'POST':
+          product.delete()
+        return redirect('admin_products')
+    else:
+        product = get_object_or_404(Product, pk=pk, owner=request.user)
     if request.method == 'POST':
         product.delete()
     return redirect('my_products')
 
 @login_required
 def edit_product(request, pk):
-    product = get_object_or_404(Product, pk=pk, owner=request.user)
+    if request.user.user_type == 'admin':
+        product = get_object_or_404(Product, pk=pk)
+    else:
+        product = get_object_or_404(Product, pk=pk, owner=request.user)
 
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
+            if request.user.user_type == 'admin':
+                return redirect('admin_products')
             return redirect('my_products')
     else:
         form = ProductForm(instance=product)
 
     return render(request, 'furniture/edit_product.html', {'form': form, 'product': product})
+@staff_member_required
+def admin_manage_products(request):
+    products = Product.objects.all()
+    return render(request, 'furniture/admin_products.html', {'products': products})
 
 

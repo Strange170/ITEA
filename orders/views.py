@@ -93,3 +93,16 @@ def toggle_order_status(request, order_id):
     order.save()
     messages.success(request, f"Order #{order.id} status changed to {order.status}")
     return redirect('admin_all_orders')
+@login_required
+def seller_orders(request):
+    if request.user.user_type != 'seller':
+        return render(request, 'unauthorized.html')
+
+    seller_products = Product.objects.filter(owner=request.user)
+    
+    order_items = OrderItem.objects.filter(product__in=seller_products).select_related('order', 'product')
+
+    context = {
+        'order_items': order_items
+    }
+    return render(request, 'orders/seller_orders.html', context)

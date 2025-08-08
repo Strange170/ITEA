@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Seller Orders</title>
+  <link rel="stylesheet" href="{% static 'css/seller_orders.css' %}">
+</head>
+<body>
+  {% include 'Components/header.html' %}
+  <div class="container">
+    <h1>Orders on Your Products</h1>
+    
+    {% if order_items %}
+      <table>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Ordered By</th>
+          <th>Order Date</th>
+        </tr>
+        {% for item in order_items %}
+          <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>£{{ item.price }}</td>
+            <td>{{ item.order.user.username }}</td>
+            <td>{{ item.order.created_at|date:"Y-m-d H:i" }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p>No orders on your products yet.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, about_page, products_page, product_page , manage_products, seller_products, add_product, delete_product, edit_product
+from .views import home, about_page, products_page, product_page , manage_products, seller_products, add_product, delete_product, edit_product, admin_manage_products
 from django.contrib.auth.views import LogoutView
 
 
@@ -16,6 +16,8 @@ urlpatterns = [
     path('add-product/', add_product, name='add_product'),
     path('seller/products/delete/<int:pk>/', delete_product, name='delete_product'),
     path('seller/products/edit/<int:pk>/', edit_product, name='edit_product'),
+    path('manage/products/', admin_manage_products, name='admin_products'),
+
 
 
 ]
