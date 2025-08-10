@@ -59,7 +59,6 @@
                     <strong>{{ user.username|default:'User' }}</strong>
                  </div>
                   <div class="admin-actions">
-                    <a href="{% url 'profile' %}"><i class="fa-solid fa-user"></i></a>
           <form method="post" action="{% url 'logout' %}" style="display: inline;">
             {% csrf_token %}
             <button type="submit" style="background: none; border: none; cursor: pointer;">
