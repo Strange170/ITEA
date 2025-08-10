@@ -3,16 +3,22 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product
 from .forms import ProductForm
+from django.db.models import Sum
+from django.db.models.functions import Random
+
 
 def home(request):
     return render(request, 'furniture/home.html')
 
+
 def about_page(request):
     return render(request, 'pages/about.html')
+
 
 def products_page(request):
     products = Product.objects.all().order_by('-created_at')
     return render(request, 'furniture/products.html', {'products': products})
+
 
 def product_page(request, pk):
     try:
@@ -20,7 +26,20 @@ def product_page(request, pk):
     except Product.DoesNotExist:
         return render(request, 'furniture/noproduct.html')
 
-    return render(request, 'furniture/product.html', {'product': product})
+    bestseller_products = Product.objects.annotate(
+        total_sold=Sum('order_items_orders__quantity')
+    ).order_by('-total_sold')[:3]
+
+    related_products = Product.objects.filter(
+        subcategory=product.subcategory
+    ).exclude(id=product.id).order_by(Random())[:4]
+
+    context = {
+        'product': product,
+        'bestseller_products': bestseller_products,
+        'related_products': related_products,
+    }
+    return render(request, 'furniture/product.html', context)
 
 
 @login_required
@@ -28,15 +47,18 @@ def manage_products(request):
     products = Product.objects.filter(owner=request.user)
     return render(request, 'furniture/manage_products.html', {'products': products})
 
+
 def products_by_owner(request):
     products = Product.objects.filter(owner=request.user)
     return render(request, 'furniture/products.html', {'products': products})
+
 
 @login_required
 def seller_products(request):
     seller = request.user
     products = Product.objects.filter(owner=seller)
     return render(request, 'furniture/seller_products.html', {'products': products})
+
 
 @login_required
 def add_product(request):
@@ -55,18 +77,20 @@ def add_product(request):
 
     return render(request, 'furniture/add_product.html', {'form': form})
 
+
 @login_required
 def delete_product(request, pk):
     if request.user.user_type == 'admin':
         product = get_object_or_404(Product, pk=pk)
         if request.method == 'POST':
-          product.delete()
+            product.delete()
         return redirect('admin_products')
     else:
         product = get_object_or_404(Product, pk=pk, owner=request.user)
-    if request.method == 'POST':
-        product.delete()
-    return redirect('my_products')
+        if request.method == 'POST':
+            product.delete()
+        return redirect('my_products')
+
 
 @login_required
 def edit_product(request, pk):
@@ -86,9 +110,13 @@ def edit_product(request, pk):
         form = ProductForm(instance=product)
 
     return render(request, 'furniture/edit_product.html', {'form': form, 'product': product})
+
+
 @staff_member_required
 def admin_manage_products(request):
     products = Product.objects.all()
     return render(request, 'furniture/admin_products.html', {'products': products})
 
 
+def charts_page(request):
+    return render(request, 'dashboard/charts.html')

@@ -25,3 +25,17 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+class Room(models.Model):
+    room_name = models.CharField(max_length=100)
+
+
+class Subcategory(models.Model):
+    name = models.CharField(max_length=100)
+    img = models.ImageField(upload_to='subcategories/', blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+

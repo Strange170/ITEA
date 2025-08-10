@@ -1,0 +1,176 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #ddd;
+}
+
+.admin-wrapper {
+    display: flex;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 180px;
+  overflow-y: auto;
+  background: #333;
+  color: white;
+  padding-top: 25px;
+  padding-left: 5px;
+}
+
+.logo {
+    text-align: center;
+    font-size: 34px;
+    margin-bottom: 120px;
+}
+
+.sidebar a {
+    text-decoration: none;
+}
+
+.menu-item {
+    padding: 12px 20px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px;
+    width: 190px;
+    margin-bottom: 5px;
+}
+
+.menu-item.active {
+    background: #ddd;
+    color: #333;
+}
+
+.main-content {
+    flex: 1;
+    background: #ddd;
+    padding: 20px; /* إضافة padding لتجنب الالتصاق بالحواف */
+}
+
+.admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 20px;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.notification-wrapper {
+    position: relative;
+    margin-right: 10px;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    padding: 4px 4px;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.admin-header .avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+
+.admin-info {
+    text-align: left;
+}
+
+.admin-info strong {
+    display: block;
+}
+
+.admin-info small {
+    font-size: 12px;
+}
+
+/* styles from manage_users.css */
+.users-container {
+    max-width: 100%; /* تعديل العرض ليناسب الحاوية */
+    margin: 0 auto; /* إزالة الهامش العلوي والسفلي */
+    background: #fff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.users-container h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.btn {
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn.save {
+    background-color: #10b981;
+}
+
+.btn.save:hover {
+    background-color: #059669;
+}
+
+.btn.delete {
+    background-color: #ef4444;
+    margin-left: 8px;
+}
+
+.messages {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 16px;
+    color: green;
+    font-weight: bold;
+}
+
+.user-type-select {
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}

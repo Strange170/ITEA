@@ -1,14 +1,7 @@
+{% extends 'dashboard/dashboard.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>All Orders - Admin</title>
-  <link rel="stylesheet" href="{% static 'css/admin_orders.css' %}">
-</head>
-<body>
-  {% include 'Components/header.html' %}
 
+{% block content %}
   <div class="orders-container">
     <h2>📦 All Orders</h2>
 
@@ -19,9 +12,7 @@
             <strong>Order ID:</strong> {{ order.id }} |
             <strong>User:</strong> {{ order.user.username }} |
             <strong>Status:</strong> {{ order.status }}
-                <a href="{% url 'toggle_order_status' order.id %}" class="btn status-toggle">
-                  Change
-                </a>
+            <a href="{% url 'toggle_order_status' order.id %}" class="btn status-toggle">Change</a> |
             <strong>Date:</strong> {{ order.created_at|date:"d M Y H:i" }}
           </div>
           <div class="order-info">
@@ -43,7 +34,4 @@
       <p class="empty-msg">No orders found.</p>
     {% endif %}
   </div>
-
-  {% include 'Components/footer.html' %}
-</body>
-</html>
+{% endblock %}

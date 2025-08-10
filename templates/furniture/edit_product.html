@@ -1,20 +1,7 @@
-<!DOCTYPE html>
+{% extends 'dashboard/dashboard.html' %}
 {% load static %}
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Edit Product</title>
-    <link rel="stylesheet" href="{% static 'css/add_product.css' %}" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      crossorigin="anonymous"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    {% include 'Components/header.html' %}
 
+{% block content %}
     <div class="container">
       <div class="form-box">
         <h2>Edit Product</h2>
@@ -80,6 +67,6 @@
       </div>
     </div>
 
-    {% include 'Components/footer.html' %}
-  </body>
+
+  {% endblock %}
 </html>

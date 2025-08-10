@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ITEA 🛋️</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/dashboard_header.css' %}" />
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="{% static 'css/manage_users.css' %}">
+  <link rel="stylesheet" href="{% static 'css/admin_products.css' %}">
+  <link rel="stylesheet" href="{% static 'css/admin_orders.css' %}">
+  <link rel="stylesheet" href="{% static 'css/seller_dashboard.css' %}">
+  <!-- <link rel="stylesheet" href="{% static 'css/seller_orders.css' %}"> -->
+  <link rel="stylesheet" href="{% static 'css/seller_products.css' %}">
+  <link rel="stylesheet" href="{% static 'css/add_product.css' %}">
+  <link rel="stylesheet" href="{% static 'css/add_product.css' %}" />
+
+</head>
+<body>
+    <div class="admin-wrapper">
+<div class="sidebar">
+    <div class="logo">ITEA</div>
+    {% if user.is_authenticated and user.user_type == 'admin' %}
+        <a href="{% url 'manage_users' %}" class="menu-item {% if request.resolver_match.url_name == 'manage_users' %}active{% endif %}">
+            Manage Users
+        </a>
+
+        <a href="{% url 'admin_all_orders' %}" class="menu-item {% if request.resolver_match.url_name == 'admin_all_orders' %}active{% endif %}">
+            All Orders
+        </a>
+        
+        <a href="{% url 'admin_products' %}" class="menu-item {% if request.resolver_match.url_name == 'admin_products' %}active{% endif %}">
+            Manage Products
+        </a>
+    {% endif %}
+
+
+        {% if user.is_authenticated and user.user_type == 'seller' %}
+          <a href="{% url 'my_products' %}" class="menu-item {% if request.resolver_match.url_name == 'my_products' %}active{% endif %}">My Products</a>
+          <a href="{% url 'add_product' %}" class="menu-item {% if request.resolver_match.url_name == 'add_product' %}active{% endif %}">Add Product</a>
+          <a href="{% url 'seller_dashboard' %}" class="menu-item {% if request.resolver_match.url_name == 'seller_dashboard' %}active{% endif %}">Charts</a>
+          <a href="{% url 'seller_orders' %}" class="menu-item {% if request.resolver_match.url_name == 'seller_orders' %}active{% endif %}">My Orders</a>
+        {% endif %}
+</div>
+
+
+        <div class="main-content">
+            <header class="admin-header">
+                 <div class="admin-info">
+                    <strong>{{ user.username|default:'User' }}</strong>
+                 </div>
+                  <div class="admin-actions">
+                    <a href="{% url 'profile' %}"><i class="fa-solid fa-user"></i></a>
+          <form method="post" action="{% url 'logout' %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" style="background: none; border: none; cursor: pointer;">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
+          </form>
+                 </div>
+            </header>
+
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

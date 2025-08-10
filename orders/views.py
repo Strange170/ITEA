@@ -56,6 +56,7 @@ def my_orders_view(request):
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'orders/my_orders.html', {'orders': orders})
 
+
 @login_required
 def seller_dashboard(request):
     if request.user.user_type != 'seller':
@@ -75,34 +76,52 @@ def seller_dashboard(request):
         'labels': product_names,
         'data': product_sales
     })
+
+
 def is_admin(user):
     return user.is_authenticated and user.user_type == 'admin'
+
+
+def is_admin_or_seller(user):
+    return user.is_authenticated and (user.user_type == 'admin' or user.user_type == 'seller')
+
 
 @user_passes_test(is_admin)
 def admin_all_orders_view(request):
     orders = Order.objects.select_related('user').prefetch_related('items__product').order_by('-created_at')
     return render(request, 'orders/admin_all_orders.html', {'orders': orders})
 
-@user_passes_test(is_admin)
+
+@user_passes_test(is_admin_or_seller)
+@login_required
 def toggle_order_status(request, order_id):
+    if request.method != 'POST':
+        messages.error(request, "Invalid request method.")
+        if request.user.user_type == 'admin':
+            return redirect('admin_all_orders')
+        return redirect('seller_orders')
+
     order = get_object_or_404(Order, id=order_id)
+
+    if request.user.user_type == 'seller':
+        seller_products = Product.objects.filter(owner=request.user)
+        if not OrderItem.objects.filter(order=order, product__in=seller_products).exists():
+            messages.error(request, "You don't have permission to change this order's status.")
+            return redirect('seller_orders')
+
     if order.status == 'PENDING':
         order.status = 'COMPLETED'
     else:
         order.status = 'PENDING'
     order.save()
     messages.success(request, f"Order #{order.id} status changed to {order.status}")
-    return redirect('admin_all_orders')
-@user_passes_test(is_admin)
-def toggle_order_status(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
-    if order.status == 'PENDING':
-        order.status = 'COMPLETED'
+
+    if request.user.user_type == 'admin':
+        return redirect('admin_all_orders')
     else:
-        order.status = 'PENDING'
-    order.save()
-    messages.success(request, f"Order #{order.id} status changed to {order.status}")
-    return redirect('admin_all_orders')
+        return redirect('seller_orders')
+
+
 @login_required
 def seller_orders(request):
     if request.user.user_type != 'seller':

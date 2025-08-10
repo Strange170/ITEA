@@ -31,16 +31,18 @@
           <div>Brand: {{ product.brand }}</div>
         </div>
 
-        {% if product.color1 or product.color2 %}
-        <div class="colors">
-          {% if product.color1 %}
-            <div class="color-swatch" style="background: {{ product.color1 }}" title="Color 1"></div>
-          {% endif %}
-          {% if product.color2 %}
-            <div class="color-swatch" style="background: {{ product.color2 }}" title="Color 2"></div>
-          {% endif %}
-        </div>
-        {% endif %}
+          <div class="colors">
+            {% if product.color1 %}
+              <label class="color-swatch" style="background: {{ product.color1 }}" title="Color 1">
+                <input type="radio" name="selected_color" value="{{ product.color1 }}" />
+              </label>
+            {% endif %}
+            {% if product.color2 %}
+              <label class="color-swatch" style="background: {{ product.color2 }}" title="Color 2">
+                <input type="radio" name="selected_color" value="{{ product.color2 }}" />
+              </label>
+            {% endif %}
+          </div>
 
         <div class="price-stock">
           <div class="price-row">
@@ -86,35 +88,45 @@
       </div>
     </div>
 
-    <h1>Bestseller products</h1>
-    <div class="carousel-container">
-      <div class="carousel" id="carousel">
-        <div class="card">
-          <img src="{% static 'img/111.webp' %}" />
-          <div class="info">Chair 1<br />£150</div>
-        </div>
-        <div class="card">
-          <img src="{% static 'img/3.webp' %}" />
-          <div class="info">Chair 2<br />£175</div>
+<h1>Bestseller products</h1>
+<div class="carousel-container">
+  <div class="carousel" id="carousel">
+    {% for bestseller in bestseller_products %}
+      <div class="card bestseller-card">
+        <a href="{% url 'product' bestseller.pk %}">
+          <img src="{{ bestseller.image.url }}" alt="{{ bestseller.name }}" />
+        </a>
+        <div class="info">
+          <span>{{ bestseller.name }}</span>
+          <span>£{{ bestseller.price }}</span>
         </div>
       </div>
-    </div>
-
+    {% endfor %}
+  </div>
+</div>
+</div>
     <div class="controls">
       <button class="arrow" onclick="scrollLeft()">❮</button>
       <button class="arrow" onclick="scrollRight()">❯</button>
     </div>
 
-    <div class="related-title">Related Products</div>
-    <div class="related">
-      <div class="product">
-        <img src="{% static 'img/3.webp' %}" alt="Sofa" />
-        <div class="info">
-          <span>Minimalist Sofa</span>
-          <span>£49900</span>
-        </div>
+<div class="related-title">Related Products</div>
+<div class="related">
+  {% for related in related_products %}
+    <div class="product">
+      <a href="{% url 'product' related.pk %}">
+        <img src="{{ related.image.url }}" alt="{{ related.name }}" />
+      </a>
+      <div class="info">
+        <span>{{ related.name }}</span>
+        <span>£{{ related.price }}</span>
       </div>
     </div>
+  {% empty %}
+    <p>No related products available.</p>
+  {% endfor %}
+</div>
+
 
     {% include 'Components/footer.html' %}
     <script src="{% static 'js/product.js' %}"></script>

@@ -1,3 +1,5 @@
+/* Add Product Page CSS - after layout adjustment */
+
 body {
   font-family: 'Inter', sans-serif;
   background-color: #f2f2f2;
@@ -6,9 +8,9 @@ body {
 }
 
 .container {
-  max-width: 700px;
+  max-width: 900px;  /* خليتها أعرض شوية */
   margin: 60px auto;
-  padding: 20px;
+  padding: 30px 40px;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -17,50 +19,66 @@ body {
 .form-box h2 {
   text-align: center;
   color: #333;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  /* عمودين */
+  gap: 30px 40px;
+  align-items: center;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group label {
-  display: block;
   font-weight: 600;
-  margin-bottom: 6px;
   color: #444;
+  margin-bottom: 8px;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
-  width: 100%;
   padding: 10px;
   border: 2px solid #ccc;
   border-radius: 6px;
   font-size: 15px;
   box-sizing: border-box;
   transition: border 0.3s ease;
+  width: 100%;
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   border-color: #4e4e4e;
   outline: none;
 }
 
+/* الزرار عشان ياخد كل عرض السطر تحت الحقول */
 .submit-btn {
+  grid-column: 1 / -1;  /* ياخد عرض العمودين */
   background-color: #4e4e4e;
   color: #fff;
   border: none;
-  padding: 12px 20px;
-  font-size: 16px;
+  padding: 14px 0;
+  font-size: 18px;
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s ease;
-  width: 100%;
+  margin-top: 10px;
 }
 
 .submit-btn:hover {
   background-color: #2e2e2e;
+}
+
+/* لو عايز توازن عرض textarea مثلاً */
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
 }

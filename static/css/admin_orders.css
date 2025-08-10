@@ -66,3 +66,15 @@
 .btn.status-toggle:hover {
   background-color: #f59e0b;
 }
+.btn.status-toggle {
+  background-color: #2563eb;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn.status-toggle:hover {
+  background-color: #1d4ed8;
+}

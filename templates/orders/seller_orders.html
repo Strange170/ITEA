@@ -1,13 +1,5 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Seller Orders</title>
-  <link rel="stylesheet" href="{% static 'css/seller_orders.css' %}">
-</head>
-<body>
-  {% include 'Components/header.html' %}
+{% extends 'dashboard/dashboard.html' %}
+{% block content %}
   <div class="container">
     <h1>Orders on Your Products</h1>
     
@@ -19,6 +11,8 @@
           <th>Price</th>
           <th>Ordered By</th>
           <th>Order Date</th>
+          <th>Status</th>
+          <th>Action</th>
         </tr>
         {% for item in order_items %}
           <tr>
@@ -27,6 +21,13 @@
             <td>£{{ item.price }}</td>
             <td>{{ item.order.user.username }}</td>
             <td>{{ item.order.created_at|date:"Y-m-d H:i" }}</td>
+            <td>{{ item.order.status }}</td>
+            <td>
+                      <form method="post" action="{% url 'toggle_order_status' item.order.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn status-toggle">Change</button>
+          </form>
+            </td>
           </tr>
         {% endfor %}
       </table>
@@ -34,5 +35,4 @@
       <p>No orders on your products yet.</p>
     {% endif %}
   </div>
-</body>
-</html>
+{% endblock %}

@@ -48,3 +48,5 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return f"{self.username} ({self.user_type})"
 
 
+
+
