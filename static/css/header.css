@@ -332,3 +332,40 @@ nav {
   font-weight: bold;
   color: #4e4e4e;
 }
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-form input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 4px 6px;
+  font-size: 14px;
+  outline: none;
+  background: transparent;
+  width: 0;
+  opacity: 0;
+  transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.search-form:hover input {
+  width: 120px;
+  opacity: 1;
+}
+
+.search-form button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 5px;
+}
+
+nav .right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+

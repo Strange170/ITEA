@@ -70,7 +70,7 @@ h1 {
 }
 
 .edit-btn {
-  background-color: #2563eb;
+  background-color: #666;
   color: white;
   padding: 8px 14px;
   font-size: 14px;
@@ -80,7 +80,7 @@ h1 {
 }
 
 .edit-btn:hover {
-  background-color: #1d4ed8;
+  background-color: #666;
 }
 
 .delete-btn {

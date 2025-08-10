@@ -37,33 +37,11 @@
     <form method="GET">
       <select name="price">
         <option value="">Price</option>
-        <option value="0-2000" {% if price == '0-2000' %}selected{% endif %}>Under £2000</option>
-        <option value="5000-10000" {% if price == '5000-10000' %}selected{% endif %}>£5000 - £10000</option>
-        <option value="10000-20000" {% if price == '10000-20000' %}selected{% endif %}>£10000 - £20000</option>
-        <option value="20000+" {% if price == '20000+' %}selected{% endif %}>Above £20000</option>
+        <option value="50-200" {% if price == '50-200' %}selected{% endif %}>£50 - £200</option>
+        <option value="500-1000" {% if price == '500-1000' %}selected{% endif %}>£500 - £1000</option>
+        <option value="1000-2000" {% if price == '1000-2000' %}selected{% endif %}>£1000 - £2000</option>
+        <option value="2000+" {% if price == '2000+' %}selected{% endif %}>Above £2000</option>
       </select>
-
-      <select name="room">
-        <option value="">Room</option>
-        {% for room in rooms %}
-          <option value="{{ room.id }}" {% if room.id|stringformat:"s" == request.GET.room %}selected{% endif %}>{{ room.room_name }}</option>
-        {% endfor %}
-      </select>
-
-      <select name="category">
-        <option value="">Category</option>
-        {% for category in categories %}
-          <option value="{{ category.id }}" {% if category.id|stringformat:"s" == request.GET.category %}selected{% endif %}>{{ category.name }}</option>
-        {% endfor %}
-      </select>
-
-      <select name="subcategory">
-        <option value="">Sub Category</option>
-        {% for sub in subcategories %}
-          <option value="{{ sub.id }}" {% if sub.id|stringformat:"s" == request.GET.subcategory %}selected{% endif %}>{{ sub.name }}</option>
-        {% endfor %}
-      </select>
-
       <button type="submit">Filter</button>
     </form>
   </div>
@@ -71,7 +49,7 @@
   <div class="product-grid">
     {% for product in products %}
       <div class="card">
-          <div class="subcategory">{{ product.subcategory|default:"sub" }}</div>
+        <div class="subcategory">{{ product.subcategory|default:"sub" }}</div>
         <div class="colors">
           <span style="background: {{ product.color1|default:'#999' }}"></span>
           <span style="background: {{ product.color2|default:'#ccc' }}"></span>
@@ -96,23 +74,26 @@
     {% endfor %}
   </div>
 
-  {% if is_paginated %}
-    <div class="pagination">
-      {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+{% if is_paginated %}
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?{{ params }}&page={{ page_obj.previous_page_number }}">&laquo;</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if num == page_obj.number %}
+        <button class="current">{{ num }}</button>
+      {% else %}
+        <a href="?{{ params }}&page={{ num }}">{{ num }}</a>
       {% endif %}
-      {% for num in page_obj.paginator.page_range %}
-        {% if num == page_obj.number %}
-          <button class="current">{{ num }}</button>
-        {% else %}
-          <a href="?page={{ num }}">{{ num }}</a>
-        {% endif %}
-      {% endfor %}
-      {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
-      {% endif %}
-    </div>
-  {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <a href="?{{ params }}&page={{ page_obj.next_page_number }}">&raquo;</a>
+    {% endif %}
+  </div>
+{% endif %}
+
 
   {% include 'Components/footer.html' %}
   <script src="{% static 'js/User/products.js' %}"></script>

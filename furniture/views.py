@@ -3,8 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product
 from .forms import ProductForm
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from django.db.models.functions import Random
+from django.core.paginator import Paginator
+
 
 
 def home(request):
@@ -16,8 +18,43 @@ def about_page(request):
 
 
 def products_page(request):
-    products = Product.objects.all().order_by('-created_at')
-    return render(request, 'furniture/products.html', {'products': products})
+    products_list = Product.objects.all().order_by('-created_at')
+
+    query = request.GET.get('q', '')
+    if query:
+        products_list = products_list.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query) |
+            Q(category__icontains=query) |
+            Q(subcategory__icontains=query)
+        )
+
+    price = request.GET.get('price')
+    if price:
+        if '-' in price:
+            min_price, max_price = price.split('-')
+            products_list = products_list.filter(price__gte=min_price, price__lte=max_price)
+        elif '+' in price:
+            min_price = price.replace('+', '')
+            products_list = products_list.filter(price__gte=min_price)
+
+    paginator = Paginator(products_list, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    params = request.GET.copy()
+    if 'page' in params:
+        params.pop('page')
+
+    context = {
+        'products': page_obj,
+        'page_obj': page_obj,
+        'is_paginated': page_obj.has_other_pages(),
+        'price': price,
+        'query': query,
+        'params': params.urlencode()
+    }
+    return render(request, 'furniture/products.html', context)
 
 
 def product_page(request, pk):

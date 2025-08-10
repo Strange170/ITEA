@@ -19,16 +19,14 @@
         <a href="{% url 'products' %}" class="underline">Shop</a>
         <a href="{% url 'Home' %}#about" class="underline">About</a>
         <a href="{% url 'Home' %}#conatct" class="underline">Contact</a>
-        <a href="{% url 'Home' %}#category" class="underline">Categories</a>
-
-
-
-
       </div>
 
       <div class="right">
-        <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-      
+           <form class="search-form" method="get" action="{% url 'products' %}">
+          <input type="text" name="q" placeholder="Search...">
+          <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+
 
         {% if user.is_authenticated %}
           <a href="{% url 'profile' %}"><i class="fa-solid fa-user"></i></a>
